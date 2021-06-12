@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles.css';
+import * as S from './styles'
 
 const Counter = () => {
 	const [counter, setCounter] = useState(0);
@@ -17,14 +17,14 @@ const Counter = () => {
 	};
 
 	return (
-		<div className='container'>
-			<h2 className='title'>Hello from Counter.</h2>
-			<span className='counter'>{counter}</span>
-			<div className='button-container'>
-				<button id='minus-button' onClick={decrement}>Decrement</button>
-				<button id='plus-button' onClick={increment}>Increment</button>
-			</div>
-		</div>
+		<S.Container>
+			<S.Title>Hello from Counter.</S.Title>
+			<S.Count>{counter}</S.Count>
+			<S.ButtonContainer>
+				<S.Button onClick={decrement}>Decrement</S.Button>
+				<S.Button onClick={increment}>Increment</S.Button>
+			</S.ButtonContainer>
+		</S.Container>
 	);
 };
 
