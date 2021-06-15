@@ -1,10 +1,12 @@
-import Counter from 'components/Counter';
+//import Counter from 'components/Counter';
+import TodoPage from 'pages/TodoPage'
 import { Fragment } from 'react';
 
 const App = () => {
   return (
     <Fragment>
-      <Counter/>
+      {/*<Counter/>*/}
+      <TodoPage/>
     </Fragment>
   );
 };
