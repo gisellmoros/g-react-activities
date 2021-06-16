@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import data from 'data/todo.json';
 import Header from 'components/Todo/Header';
 import ToDoList from 'components/Todo/ToDoList';
+import ToDoForm from 'components/Todo/ToDoForm'
+import { Container, Button, Card, Col, Row } from 'react-bootstrap';
 
 const TodoPage = () => {
 	const [toDoList, setToDoList] = useState(data);
-	// console.log(toDoList);
 
 	const handleToggle = id => {
 		let mapped = toDoList.map(todo => {
@@ -16,11 +17,34 @@ const TodoPage = () => {
 		setToDoList(mapped);
 	};
 
+	const handleFilter = () => {
+		let filtered = toDoList.filter(task => !task.complete);
+		setToDoList(filtered);
+	};
+
 	return (
-		<div className='text-center'>
-			<Header />
-			<ToDoList handleToggle={handleToggle} toDoList={toDoList} />
-		</div>
+		<Container className='text-center'>
+			<Row>
+				<Col className='m-auto mt-3 mb-5' xs={12} md={4}>
+					<Header />
+					<Card className='mb-3'>
+						<Card.Body>
+							<ToDoList handleToggle={handleToggle} toDoList={toDoList} />
+						</Card.Body>
+					</Card>
+
+					<Button
+						style={{ width: '100%' }}
+						className='mb-3'
+						variant='primary'
+						onClick={handleFilter}
+					>
+						Clear completed
+					</Button>
+					<ToDoForm setToDoList={setToDoList}toDoList={toDoList}/>
+				</Col>
+			</Row>
+		</Container>
 	);
 };
 
