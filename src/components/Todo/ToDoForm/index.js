@@ -1,45 +1,45 @@
-import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import * as S from './styles';
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
+import * as S from "./styles";
 
 const ToDoForm = () => {
-  const [newTask, setNewTask] = useState('');
+  const [newTask, setNewTask] = useState("");
 
-  const url = 'http://localhost:4000/api/todolist';
+  const url = "http://localhost:4000/api/todolist";
 
   const createTodo = () => {
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         task: newTask,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
-  const addTaskHandler = e => {
+  const addTaskHandler = (e) => {
     e.preventDefault();
     createTodo();
-    setNewTask('');
+    setNewTask("");
   };
 
   return (
     <Form onSubmit={addTaskHandler}>
       <S.Group>
         <Form.Control
-          type='text'
-          placeholder='Add new task'
+          type="text"
+          placeholder="Add new task"
           value={newTask}
-          onChange={e => setNewTask(e.target.value)}
+          onChange={(e) => setNewTask(e.target.value)}
         />
-        <S.Btn type='submit'>Add task</S.Btn>
+        <S.Btn type="submit">Add task</S.Btn>
       </S.Group>
     </Form>
   );

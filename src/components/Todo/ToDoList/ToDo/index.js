@@ -1,36 +1,36 @@
-import React from 'react';
-import './styles.css';
-import TodolistContext from 'context/todolist';
+import React from "react";
+import "./styles.css";
+import TodolistContext from "context/todolist";
 
 const ToDo = ({ todo }) => {
     const { toDoList } = React.useContext(TodolistContext);
 
-    const url = 'http://localhost:4000/api/todolist';
+    const url = "http://localhost:4000/api/todolist";
 
-    const makeComplete = _id => {
+    const makeComplete = (_id) => {
         fetch(`${url}/makecomplete/${_id}`, {
-            method: 'PUT',
+            method: "PUT",
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 console.log(data);
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 
-    const makeIncomplete = _id => {
+    const makeIncomplete = (_id) => {
         fetch(`${url}/makeincomplete/${_id}`, {
-            method: 'PUT',
+            method: "PUT",
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 console.log(data);
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 
-    const handleToggle = _id => {
-        const [selectedTodo] = toDoList.filter(todo => todo._id === _id);
+    const handleToggle = (_id) => {
+        const [selectedTodo] = toDoList.filter((todo) => todo._id === _id);
 
         if (selectedTodo.complete) {
             makeIncomplete(_id);
@@ -41,9 +41,9 @@ const ToDo = ({ todo }) => {
 
     return (
         <div
-            onClick={e => handleToggle(e.target.id)}
+            onClick={(e) => handleToggle(e.target.id)}
             id={todo._id}
-            className={todo.complete ? 'todo strike' : 'todo'}
+            className={todo.complete ? "todo strike" : "todo"}
         >
             {todo.task}
         </div>
