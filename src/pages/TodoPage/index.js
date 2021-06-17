@@ -9,27 +9,18 @@ import { TodolistProvider } from 'context/todolist';
 
 const TodoPage = () => {
 	const [toDoList, setToDoList] = useState([]);
-
+	
 	useEffect(() => {
 		getTodolist();
 	}, [toDoList]);
 
 	const getTodolist = () => {
-		fetch('http://localhost:4000/api/todolist/all')
+		fetch('http://localhost:4000/api/todolist/')
 			.then(res => res.json())
 			.then(data => {
 				// console.log(data);
 				setToDoList(data);
 			});
-	};
-
-	const handleToggle = _id => {
-		let mapped = toDoList.map(todo => {
-			return todo._id === Number(_id)
-				? { ...todo, complete: !todo.complete }
-				: { ...todo };
-		});
-		setToDoList(mapped);
 	};
 
 	const handleFilter = () => {
@@ -40,7 +31,6 @@ const TodoPage = () => {
 	const todolistProviderValues = {
 		toDoList,
 		setToDoList,
-		handleToggle,
 	};
 
 	return (
